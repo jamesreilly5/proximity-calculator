@@ -15,14 +15,14 @@ RSpec.describe DistanceUtils do
   describe '.calculate' do
     context 'when valid latitude and longitudes are provided' do
       it 'calculates the circular distance' do
-        expect(DistanceUtils.calculate(lat1, lon1, lat2, lon2)).to eq 284.87560217872164
+        expect(DistanceUtils.calculate_distance(lat1, lon1, lat2, lon2)).to eq 284.87560217872164
       end
     end
 
     context 'when invalid latitude is entered' do
       let(:invalid_lat) { 91 }
       it 'throws an argument error' do
-        expect { DistanceUtils.calculate(invalid_lat, lon1, lat2, lon2) }
+        expect { DistanceUtils.calculate_distance(invalid_lat, lon1, lat2, lon2) }
           .to raise_error ArgumentError
       end
     end
@@ -30,7 +30,7 @@ RSpec.describe DistanceUtils do
     context 'when invalid longitude is entered' do
       let(:invalid_lon) { 181 }
       it 'throws an argument error' do
-        expect { DistanceUtils.calculate(lat1, lon1, lat2, invalid_lon) }
+        expect { DistanceUtils.calculate_distance(lat1, lon1, lat2, invalid_lon) }
           .to raise_error ArgumentError
       end
     end

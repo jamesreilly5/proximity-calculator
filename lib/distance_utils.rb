@@ -3,7 +3,7 @@ class DistanceUtils
 
   # Using the haversine distance algorithm
   # rubocop:disable AbcSize
-  def self.calculate(lat1, lon1, lat2, lon2)
+  def self.calculate_distance(lat1, lon1, lat2, lon2)
     validate_params(lat1, lon1, lat2, lon2)
 
     lat_delta = to_rad(lat1 - lat2)
