@@ -20,7 +20,7 @@ We have some customer records in a text file (customers.json) -- one customer pe
 ### Running
 **Run the program**
 
-```bundle exec rake find_users_within_100_km```
+```bundle exec rake customer_proximity:find_users_within_100_km```
 
 **Running the tests**
 
