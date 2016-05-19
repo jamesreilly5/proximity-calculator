@@ -10,6 +10,8 @@ Application to read a file and list all customers within 100km of a given latitu
 ###Setup
 ```gem install bundler```
 
+```bundle install```
+
 ### Running
 **Run the program**
 
