@@ -26,4 +26,6 @@ class FileReader
     logger.error("Could not parse line '#{json}'")
     return false
   end
+
+  private_class_method :parse_json, :valid_file?
 end
