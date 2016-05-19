@@ -1,4 +1,4 @@
-### proximity-calculator
+# proximity-calculator
 Application to read a file and list all customers within 100km of a given latitude and longitude. This program uses the haversine formula to make the calculation.
 
 ![Alt text](/screenshot.png?raw=true "Weather App")
