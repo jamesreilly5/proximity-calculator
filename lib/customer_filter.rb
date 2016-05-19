@@ -16,8 +16,8 @@ class CustomerFilter
   end
 
   def self.outside_range?(customer, distance)
-    customer_lat = Float(customer[:latitude])
-    customer_lon = Float(customer[:longitude])
+    customer_lat = Float(customer['latitude'])
+    customer_lon = Float(customer['longitude'])
     DistanceUtils.calculate_distance(
       OFFICE_LAT, OFFICE_LON, customer_lat, customer_lon
     ) > distance
