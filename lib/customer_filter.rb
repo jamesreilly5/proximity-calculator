@@ -11,7 +11,7 @@ class CustomerFilter
   end
 
   def self.sort_by_id(array, descending)
-    sorted_array = array.sort_by { |hash| hash[:user_id].to_i }
+    sorted_array = array.sort_by { |hash| hash['user_id'].to_i }
     descending ? sorted_array.reverse : sorted_array
   end
 
