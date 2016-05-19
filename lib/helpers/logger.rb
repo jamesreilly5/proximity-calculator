@@ -23,5 +23,4 @@ module Logging
   def logger
     Logging.logger
   end
-  # rubocop:enable
 end

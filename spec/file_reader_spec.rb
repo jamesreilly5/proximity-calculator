@@ -5,14 +5,13 @@ RSpec.describe FileReader do
   PATH = "#{File.dirname(__FILE__)}/fixtures".freeze
 
   describe '.read' do
-    before do
-      allow_any_instance_of(Logging).to receive(:error).and_return double(Logger)
-    end
+    let(:expected_output) { JSON.parse(IO.read("#{PATH}/#{file_name}")) }
+    let(:dummy_logger) { double(Logging, error: true) }
+
+    before { allow(Logging).to receive(:logger).and_return(dummy_logger) }
 
     context 'when valid data is provided' do
-      let(:expected_output) do
-        JSON.parse(IO.read("#{PATH}/expected_valid_user_data.json").freeze)
-      end
+      let(:file_name) { 'expected_valid_user_data.json' }
 
       it 'reads and extracts the data' do
         expect(FileReader.read("#{PATH}/valid_user_data.txt")).to eq expected_output
@@ -20,17 +19,15 @@ RSpec.describe FileReader do
     end
 
     context 'invalid data' do
-      let(:expected_output) do
-        JSON.parse(IO.read("#{PATH}/expected_corrupt_user_data.json").freeze)
-      end
+      let(:file_name) { 'expected_corrupt_user_data.json' }
 
       context 'when corrupt data is provided' do
         let(:subject) do
           FileReader.read("#{PATH}/corrupt_user_data.txt")
         end
 
-        xit 'logs an error' do
-          expect(Logging).to receive(:error)
+        it 'logs an error' do
+          expect(dummy_logger).to receive(:error).exactly(8).times
           subject
         end
 
@@ -41,11 +38,16 @@ RSpec.describe FileReader do
     end
 
     context 'when file is empty' do
-      it 'returns an empty data set'
-    end
+      subject { FileReader.read("#{PATH}/empty_file.txt") }
 
-    context 'file does not exit' do
-      it 'logs an error'
+      it 'returns an empty data set' do
+        expect(subject).to eq []
+      end
+
+      it 'logs an error' do
+        expect(dummy_logger).to receive(:error).with('File is empty or does not exist')
+        subject
+      end
     end
   end
 end
